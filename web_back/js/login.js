@@ -18,26 +18,24 @@ window.onload = () => {
                     })
                     return
                 }
-                $.ajax({
-                    url: 'http://localhost:8080/admin/user/login',
-                    type: 'post',
-                    dataType: 'json',
-                    data: {
+                this.$http
+                    .post('http://localhost:8080/admin/user/login', {
                         username,
                         password
-                    },
-                    success: function (backData) {
-                        console.log(backData)
-                        if (backData.code == 200) {
+                    }, {
+                        emulateJSON: true
+                    })
+                    .then((res) => {
+                        console.log('')
+                        if (res.body.code == 200) {
                             window.location.href = 'index.html'
                         } else {
-                            $('.modal-body').html('用户名或密码错误')
+                            $('.modal-body').html('用户名或密码错误,请重新输入')
                             $('#myModal').modal({
                                 keyboard: true
                             })
                         }
-                    }
-                });
+                    })
             }
         },
     })

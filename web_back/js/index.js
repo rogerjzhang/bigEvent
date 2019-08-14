@@ -7,18 +7,14 @@ $(function () {
             userPic: ''
         },
         mounted() {
-            $.ajax({
-                url:'http://localhost:8080/admin/user/info',
-                type:'get',
-                dataType:'json',
-                success:(backData)=>{
-                    this.nickname = backData.data.nickname
-                    this.userPic = backData.data.userPic
-                }
-            });
+            this.$http.get('http://localhost:8080/admin/user/info')
+                .then(res => {
+                    console.log(res)
+                    this.nickname = res.body.data.nickname
+                    this.userPic = res.body.data.userPic
+                })
         },
     })
-
     //退出按钮点击事件
     $('.icon-tuichu').parent().on('click', function (e) {
         e.preventDefault();
