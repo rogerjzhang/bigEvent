@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/vue-resource.min.js"></script>
+    <script src="./js/user.js"></script>
 
 </head>
 
@@ -19,46 +22,50 @@
         <div class="common_title">
             用户信息修改
         </div>
-        <div class="container-fluid common_con">
+        <div class="container-fluid common_con" id="userInfo">
             <form class="form-horizontal article_form">
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">用户名称：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputEmail3" value="李思思">
+                        <input type="text" name="username" class="form-control" id="inputEmail3" v-model="username">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">昵称：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputEmail3" value="思思">
+                        <input type="text" name="nickname" class="form-control" id="inputEmail3" v-model="nickname">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">邮箱：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputEmail3" value="lisisi@126.com">
+                        <input type="text" class="form-control" id="inputEmail3"  name="email" v-model="email">
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">用户图标：</label>
                     <div class="col-sm-10">
-                        <img src="images/2.jpg" alt="" class="user_pic">
-                        <input type="file" id="exampleInputFile">
+                        <img :src="userPic" alt="" class="user_pic" >
+                        <br>
+                        <input type="file" @change="reloadPic($event)" id="exampleInputFile" name="userPic" style="display: none" ref="userPic">
+                        <label for="exampleInputFile">
+                            <img src="./images/uploadPic.jpg" alt="" style="height: 50px;">
+                        </label>
                     </div>
                 </div>
 
                 <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">密码：</label>
                         <div class="col-sm-4">
-                            <input type="password" class="form-control" id="inputEmail3" value="12345678">
+                            <input type="password" class="form-control" id="inputEmail3" v-model="password" name="password">
                         </div>
                     </div>
                
     
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success">修改</button>
+                        <button type="submit" @click.prevent="recompose" class="btn btn-success">修改</button>
                     </div>
                 </div>
             </form>

@@ -1,6 +1,19 @@
 $(function () {
+    let headVm = new Vue({
+        el: '.header_bar',
+        data: {
+            userPic: ''
+        },
+        methods: {
+            showModal(){
+                $('#myModal').modal({
+                    keyboard: true
+                })
+            }
+        },
+    }) 
     //加载管理员信息
-    new Vue({
+    let userVm = new Vue({
         el: '#user_info',
         data: {
             nickname: '',
@@ -12,17 +25,14 @@ $(function () {
                     console.log(res)
                     this.nickname = res.body.data.nickname
                     this.userPic = res.body.data.userPic
+                    headVm.userPic = res.body.data.userPic
                 })
         },
     })
     //退出按钮点击事件
-    $('.icon-tuichu').parent().on('click', function (e) {
-        e.preventDefault();
-        $('#myModal').modal({
-            keyboard: true
-        })
-    })
     $('.btn-primary').on('click', function () {
         window.location.href = 'login.html'
     })
+    window.userVm=userVm
+    window.headVm=headVm
 })
