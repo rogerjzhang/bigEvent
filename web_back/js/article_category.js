@@ -38,14 +38,16 @@ window.onload = function () {
                         }
                     })
             },
-            del(id) {
+            del(id,index) {
                 console.log('123')
-                // if(confirm('确定要删除吗?')){
-                //     this.$http.post('http://127.0.0.1:8080/admin/category/delete',{id},{emulateJSON:true})
-                //     .then(res=>{
-                //         console.log(res)
-                //     })
-                // }
+                if(confirm('确定要删除吗?')){
+                    this.$http.post('http://127.0.0.1:8080/admin/category/delete',{id},{emulateJSON:true})
+                    .then(res=>{
+                        console.log(res)
+                        // this.getList()
+                        this.categorylist.splice(index,1)
+                    })
+                }
             }
 
         },
@@ -59,26 +61,26 @@ window.onload = function () {
             //         }
             //     })
         },
-        components: {
-            'mylist': {
-                props: ['data'],
-                template: '#tr_temp',
-                methods: {
-                    del(id) {
-                        if (confirm('确定要删除吗?')) {
-                            this.$http.post('http://127.0.0.1:8080/admin/category/delete', {
-                                    id
-                                }, {
-                                    emulateJSON: true
-                                })
-                                .then(res => {
-                                    vm.getList()
-                                })
-                        }
-                    }
-                }
-            }
-        }
+        // components: {
+        //     'mylist': {
+        //         props: ['data'],
+        //         template: '#tr_temp',
+        //         methods: {
+        //             del(id) {
+        //                 if (confirm('确定要删除吗?')) {
+        //                     this.$http.post('http://127.0.0.1:8080/admin/category/delete', {
+        //                             id
+        //                         }, {
+        //                             emulateJSON: true
+        //                         })
+        //                         .then(res => {
+        //                             vm.getList()
+        //                         })
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
     })
     $('#model_shutoff').on('click', function () {
         $('#addModal').modal('hide')

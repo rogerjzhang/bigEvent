@@ -1,0 +1,18 @@
+.v-enter-active ,
+.v-leave-active {
+    transition: all 1s;
+}
+.v-leave-active {
+    position: absolute;
+}
+.v-enter,
+.v-leave-to {
+    opacity: 0;
+    transform: translateY(50px)
+}
+.v-move {
+    transition: all 1s;
+}
+.list:hover {
+    background-color: #bff;
+}

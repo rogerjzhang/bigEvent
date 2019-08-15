@@ -10,6 +10,27 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="./css/move.css">
+    <style>
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 1s;
+        }
+
+        .v-leave-active {
+            position: absolute;
+        }
+
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateY(50px)
+        }
+
+        .v-move {
+            transition: all 1s;
+        }
+    </style>
     <script src="js/jquery-1.12.4.min.js"></script>
     <script src="js/bootstrap/js/bootstrap.min.js"></script>
     <script src="./lib/vue.js"></script>
@@ -18,7 +39,7 @@
 </head>
 
 <body>
-    <div  id="article_category">
+    <div id="article_category">
         <div class="container-fluid">
             <div class="common_title">
                 文章类别管理
@@ -44,9 +65,18 @@
                                 </tr>
                                 <mylist></mylist>
                             </tbody> -->
-                    <tbody>
-                        <tr is="mylist" v-for="item in categorylist" :key="item.id" :data="item" ></tr>
-                    </tbody>
+                    <!-- <tr is="mylist" v-for="item in categorylist" :key="item.id" :data="item" ></tr> -->
+                    <transition-group tag="tbody" appear :css="true">
+                        <tr v-for="(data, index) in categorylist" :key="data.id" class="trlist">
+                            <td>{{data.name}}</td>
+                            <td>{{data.slug}}</td>
+                            <td class="text-center">
+                                <a href="#" class="btn btn-info btn-xs">编辑</a>
+                                <a href="#" v-on:click.prevent="del(data.id,index)" :ref="data.id"
+                                    class="btn btn-danger btn-xs">删除</a>
+                            </td>
+                        </tr>
+                    </transition-group>
                     <tfoot>
                         <tr>
                             <td colspan="3" class="text-center">
@@ -85,6 +115,17 @@
                 </div>
             </div>
         </div>
+        <!-- <transition-group tag="ul" appear>
+            <li v-for="(data, index) in categorylist" :key="data.id" class="trlist">
+                <td>{{data.name}}</td>
+                <td>{{data.slug}}</td>
+                <td class="text-center">
+                    <a href="#" class="btn btn-info btn-xs">编辑</a>
+                    <a href="#" v-on:click.prevent="del(data.id,index)" :ref="data.id"
+                        class="btn btn-danger btn-xs">删除</a>
+                </td>
+            </li>
+        </transition-group> -->
     </div>
 
     <script>
@@ -113,19 +154,18 @@
         } 
     </script>
 
-    <template id="tr_temp">
-        <!-- <transition-group tag="tr"> -->
-        <tr>
+    <!-- <template id="tr_temp"> -->
+    <!-- <transition-group tag="tr"> -->
+    <!-- <tr>
             <td>{{data.name}}</td>
             <td>{{data.slug}}</td>
             <td class="text-center">
-                <a href="javascript:editTr({&quot;id&quot;:&quot;1&quot;,&quot;slug&quot;:&quot;uncategorized&quot;,&quot;name&quot;:&quot;未分类&quot;});"
-                    class="btn btn-info btn-xs">编辑</a>
+                <a href="#" class="btn btn-info btn-xs">编辑</a>
                 <a href="#" v-on:click.prevent="del(data.id)" :ref="data.id" class="btn btn-danger btn-xs">删除</a>
             </td>
-        </tr>
-        <!-- </transition-group>> -->
-    </template>
+        </tr> -->
+    <!-- </transition-group>> -->
+    <!-- </template> -->
 
 </body>
 
