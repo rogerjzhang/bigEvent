@@ -8,11 +8,12 @@
 .v-enter,
 .v-leave-to {
     opacity: 0;
-    transform: translateY(50px)
+    transform: translateX(30px)
 }
 .v-move {
     transition: all 1s;
 }
-.list:hover {
-    background-color: #bff;
+.trlist {
+    width: 100%;
+    
 }

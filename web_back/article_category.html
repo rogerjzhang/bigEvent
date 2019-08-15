@@ -10,27 +10,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="./css/move.css">
-    <style>
-        .v-enter-active,
-        .v-leave-active {
-            transition: all 1s;
-        }
-
-        .v-leave-active {
-            position: absolute;
-        }
-
-        .v-enter,
-        .v-leave-to {
-            opacity: 0;
-            transform: translateY(50px)
-        }
-
-        .v-move {
-            transition: all 1s;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/transition.css">
     <script src="js/jquery-1.12.4.min.js"></script>
     <script src="js/bootstrap/js/bootstrap.min.js"></script>
     <script src="./lib/vue.js"></script>
@@ -66,7 +46,7 @@
                                 <mylist></mylist>
                             </tbody> -->
                     <!-- <tr is="mylist" v-for="item in categorylist" :key="item.id" :data="item" ></tr> -->
-                    <transition-group tag="tbody" appear :css="true">
+                    <tbody is="transition-group" appear  style="width: 100%">
                         <tr v-for="(data, index) in categorylist" :key="data.id" class="trlist">
                             <td>{{data.name}}</td>
                             <td>{{data.slug}}</td>
@@ -76,7 +56,7 @@
                                     class="btn btn-danger btn-xs">删除</a>
                             </td>
                         </tr>
-                    </transition-group>
+                    </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="3" class="text-center">

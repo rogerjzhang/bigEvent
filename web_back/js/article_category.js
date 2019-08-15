@@ -9,10 +9,23 @@ window.onload = function () {
             id: ''
         },
         methods: {
+            getList() {
+                this.$http.get('http://127.0.0.1:8080/admin/category/list')
+                    .then((res) => {
+                        if (res.body.code == 200) {
+                            this.categorylist = res.body.data
+                        }
+                    })
+            },
             addType() {
+                let {name,slug} = this
+                if(name == '' || slug == ''){
+                    alert('请输入分类名称和分类别名')
+                    return
+                }
                 this.$http.post('http://127.0.0.1:8080/admin/category/add', {
-                        name: this.name,
-                        slug: this.slug
+                        name,
+                        slug
                     }, {
                         emulateJSON: true
                     })
@@ -28,14 +41,6 @@ window.onload = function () {
                         // console.log(err)
                         alert('分类名称或别名已存在');
                         return
-                    })
-            },
-            getList() {
-                this.$http.get('http://127.0.0.1:8080/admin/category/list')
-                    .then((res) => {
-                        if (res.body.code == 200) {
-                            this.categorylist = res.body.data
-                        }
                     })
             },
             del(id,index) {
