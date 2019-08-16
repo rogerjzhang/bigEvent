@@ -11,6 +11,7 @@ window.onload = function () {
             showType: ''
         },
         methods: {
+            //拟态框确认按钮
             nitaiBtn(){
                 if(this.btnType=='new'){
                     console.log('')
@@ -19,6 +20,7 @@ window.onload = function () {
                     this.editType()
                 }
             },
+            //增加文章类别
             addType() {
                 this.$http.post('http://127.0.0.1:8080/admin/category/add', {
                         name: this.name,
@@ -40,6 +42,7 @@ window.onload = function () {
                         return
                     })
             },
+            //编辑文章类别
             editType(){
                 this.$http.post('http://127.0.0.1:8080/admin/category/edit',{id:this.id,name:this.name,slug:this.slug},{emulateJSON:true})
                 .then(res=>{
@@ -52,6 +55,7 @@ window.onload = function () {
 
 
             },
+            //获取所有文章类别
             getList() {
                 this.$http.get('http://127.0.0.1:8080/admin/category/list')
                     .then((res) => {
@@ -60,6 +64,7 @@ window.onload = function () {
                         }
                     })
             },
+            //拟态框显示
             nitai(btnType,data){
                 this.btnType = btnType
                 $('#addModal').modal('show')
@@ -79,19 +84,13 @@ window.onload = function () {
         },
         mounted() {
             this.getList()
-            // this.$http.get('http://127.0.0.1:8080/admin/category/list')
-            //     .then((res) => {
-            //         console.log(res)
-            //         if(res.body.code == 200){
-            //             this.categorylist= res.body.data 
-            //         }
-            //     })
         },
         components: {
             'mylist': {
                 props: ['data'],
                 template: '#tr_temp',
                 methods: {
+                    //删除按钮函数
                     del(id) {
                         if (confirm('确定要删除吗?')) {
                             this.$http.post('http://127.0.0.1:8080/admin/category/delete', {
@@ -104,6 +103,7 @@ window.onload = function () {
                                 })
                         }
                     },
+                    //按钮框按钮调用父组件方法
                     edit(data){
                         this.$emit('link','edit',data)
                     }
