@@ -10,8 +10,36 @@ window.onload = function () {
             totalPage: 1,//总页数
             page:1, //当前页
             perpage:10,//每页显示数量
+            prevDisabled:'disabled',
+            nextDisabled: '',
+
+        },
+        watch: {
+            //监视page发送变化时
+            page(){
+                console.log(this.page)
+                this.getAritcleList()
+                if(this.page!=1){
+                    this.prevDisabled=''
+                }else {
+                    this.prevDisabled='disabled'
+                }
+                if(this.page == this.totalPage){
+                    this.nextDisabled='disabled'
+                }else {
+                    this.nextDisabled = ''
+                }
+            }
         },
         methods: {
+            //下一页
+            // next(){
+            //     if(this.page != this.totalPage)this.page++
+            // },
+            // //最后一页
+            // next(){
+            //     if(this.page != this.totalPage)this.page++
+            // },
             //获取所有文章类型
             getTypeList() {
                 this.$http.get('http://127.0.0.1:8080/admin/category/list')
@@ -29,7 +57,7 @@ window.onload = function () {
                     params: {type,state,page,perpage}
                 })
                 .then(res=>{
-                    console.log(res)
+                    // console.log(res)
                     if(res.body.code == 200){
                         this.aritcleList = res.body.data.data
                         this.totalCount = +res.body.data.totalCount
