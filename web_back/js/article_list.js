@@ -12,12 +12,12 @@ window.onload = function () {
             perpage:10,//每页显示数量
             prevDisabled:'disabled',
             nextDisabled: '',
-
+            isHidden: 'hidden'
         },
         watch: {
             //监视page发送变化时
             page(){
-                console.log(this.page)
+                // console.log(this.page)
                 this.getAritcleList()
                 if(this.page!=1){
                     this.prevDisabled=''
@@ -48,6 +48,10 @@ window.onload = function () {
                             this.categorylist = res.body.data
                         }
                     })
+            },
+            filter(){
+                this.page = 1
+                this.getAritcleList()
             },
             //获取文章
             getAritcleList(){

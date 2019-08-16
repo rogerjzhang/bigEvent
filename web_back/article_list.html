@@ -35,7 +35,7 @@
                             <option value="草稿">草稿</option>
                             <option value="已发布">已发布</option>
                         </select>
-                        <button id="btnSearch" class="btn btn-default btn-sm" @click="getAritcleList">筛选</button>
+                        <button id="btnSearch" class="btn btn-default btn-sm" @click="filter">筛选</button>
                     </form>
                 </div>
                 <div class="col-xs-6">
@@ -72,10 +72,14 @@
 
             <div class="row text-center">
                 <ul class="pagination pagination-sm">
-                    <li :class="prevDisabled" class="page-item first" ><a href="#" class="page-link" @click="page=1">首页</a></li>
-                    <li :class="prevDisabled" class="page-item prev" ><a href="#" class="page-link" @click.prevetn="page!=1?page--:'return'">上一页</a></li>
-
-                    <li class="page-item" :class="count==page?'active':''" v-for="count in totalPage" :key="count" @click="page=count"><a href="#" class="page-link">{{count}}</a></li>
+                    <li :class="prevDisabled" class="page-item first"><a href="#" class="page-link"
+                            @click="page=1">首页</a></li>
+                    <li :class="prevDisabled" class="page-item prev"><a href="#" class="page-link"
+                            @click.prevetn="page!=1?page--:'return'">上一页</a></li>
+                        <!-- count < page-3||count > page+5 -->
+                    <li class="page-item" :class="[((page<4&&count>7)||(page>=4&&page<totalPage-3 &&(count < page-3||count > page+3))||(page>=totalPage-3&& count < totalPage-6))?'hidden':'',count==page?'active':'']"
+                        v-for="count in totalPage" :key="count" @click="page=count"><a href="#"
+                            class="page-link">{{count}}</a></li>
                     <!-- <li class="page-item active"><a href="#" class="page-link">1</a></li>
                     <li class="page-item"><a href="#" @click.prevent="page=2" class="page-link">2</a></li>
                     <li class="page-item"><a href="#" class="page-link">3</a></li>
@@ -83,8 +87,11 @@
                     <li class="page-item"><a href="#" class="page-link">5</a></li>
                     <li class="page-item"><a href="#" class="page-link">6</a></li>
                     <li class="page-item"><a href="#" class="page-link">7</a></li> -->
-                    <li :class="nextDisabled" class="page-item next"><a href="#" class="page-link"  @click="page!=totalPage?page++:'return'">下一页</a></li>
-                    <li :class="nextDisabled" class="page-item last" @click="page=totalPage"><a href="#" class="page-link">尾页</a></li>
+                    <li :class="nextDisabled" class="page-item next"><a href="#" class="page-link"
+                            @click="page!=totalPage?page++:'return'">下一页</a></li>
+                    <li :class="nextDisabled" class="page-item last" @click="page=totalPage"><a href="#"
+                            class="page-link">尾页</a></li>
+                    <li class="page-item"><span>共{{totalPage}}页</span></li>
                 </ul>
             </div>
 
