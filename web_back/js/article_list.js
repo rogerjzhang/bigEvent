@@ -3,11 +3,13 @@ window.onload = function () {
         el: '#app',
         data: {
             categorylist: [],//文章类型数组
-            selCategory:'',//选择的类型
-            selStatus:'',//选择的状态
+            type:'',//选择的类型
+            state:'',//选择的状态
             aritcleList: [],//文章数组
             totalCount: 0,//总文章数
             totalPage: 1,//总页数
+            page:1, //当前页
+            perpage:10,//每页显示数量
         },
         methods: {
             //获取所有文章类型
@@ -19,10 +21,13 @@ window.onload = function () {
                         }
                     })
             },
+            //获取文章
             getAritcleList(){
-                let {selCategory,selStatus} = this
+                let {type,state,page,perpage} = this
                 this.$http.get('http://127.0.0.1:8080/admin/article/query',
-                {selCategory,selStatus,page:1,perpage:'10'})
+                {
+                    params: {type,state,page,perpage}
+                })
                 .then(res=>{
                     console.log(res)
                     if(res.body.code == 200){
