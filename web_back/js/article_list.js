@@ -32,14 +32,6 @@ window.onload = function () {
             }
         },
         methods: {
-            //下一页
-            // next(){
-            //     if(this.page != this.totalPage)this.page++
-            // },
-            // //最后一页
-            // next(){
-            //     if(this.page != this.totalPage)this.page++
-            // },
             //获取所有文章类型
             getTypeList() {
                 this.$http.get('http://127.0.0.1:8080/admin/category/list')
