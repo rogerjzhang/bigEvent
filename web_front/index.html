@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <script src="./lib/vue.js"></script>
+    <script src="./lib/axios.min.js"></script>
+    <script src="./js/index.js"></script>
 </head>
 
 <body>
@@ -53,28 +56,12 @@
         </div>
     </div>
 
-    <div class="main_con clearfix">
+    <div class="main_con clearfix" id="app">
         <div class="left_con">
             <ul class="focus_list">
-                <li class="first">
-                    <a href="#"><img src="images/pic01.jpg" alt=""></a>
-                    <p>图片说明</p>
-                </li>
-                <li>
-                    <a href="#"><img src="images/pic02.jpg" alt=""></a>
-                    <p>图片说明图片说明图片说明图片说明图片说明图片说明图片说明图片说明图片说明</p>
-                </li>
-                <li>
-                    <a href="#"><img src="images/pic03.jpg" alt=""></a>
-                    <p>图片说明</p>
-                </li>
-                <li>
-                    <a href="#"><img src="images/pic05.jpg" alt=""></a>
-                    <p>图片说明</p>
-                </li>
-                <li>
-                    <a href="#"><img src="images/pic06.jpg" alt=""></a>
-                    <p>图片说明</p>
+                <li :class="{first:index==0}" v-for="(item,index) in articleList" :key="item.id">
+                    <a :href="'article.html?id='+item.id"><img :src="item.cover" alt=""></a>
+                    <p>{{item.title}}</p>
                 </li>
             </ul>
 
@@ -215,10 +202,10 @@
             <span>|</span>
             <a href="#">招聘人才</a>
             <span>|</span>
-            <a href="#">友情链接</a>		
+            <a href="#">友情链接</a>
         </div>
-        <p>CopyRight © 2019 深圳大事件信息技术股份有限公司   All Rights Reserved</p>
-        <p>电话：0755-****888    粤ICP备*******8号</p>
+        <p>CopyRight © 2019 深圳大事件信息技术股份有限公司 All Rights Reserved</p>
+        <p>电话：0755-****888 粤ICP备*******8号</p>
     </div>
 
 </body>
