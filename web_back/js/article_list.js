@@ -60,6 +60,24 @@ window.onload = function () {
                         this.totalPage = +res.body.data.totalPage
                     }
                 })
+            },
+            //点击删除按钮
+            del(id){
+                if(confirm('你确定要删除吗?')){
+                    axios({
+                        method:'get',
+                        url: 'http://127.0.0.1:8080/admin/article/delete',
+                        params: {
+                            id:id
+                        }
+                    }).then(res=>{
+                        console.log(res)
+                        if(res.data.code == 204){
+                            this.getAritcleList()
+                        }
+                    })
+                    
+                }
             }
         },
         mounted() {

@@ -14,13 +14,15 @@ new Vue({
             let fd = new FormData(this.$refs.form)
             fd.append('state', state)
             //获取富文本框纯文本
-            var activeEditor = tinymce.activeEditor;
-            var editBody = activeEditor.getBody();
-            activeEditor.selection.select(editBody);
-            var content = activeEditor.selection.getContent({
-                'format': 'text'
-            });
-            //将其添加到fd
+            // var activeEditor = tinymce.activeEditor;
+            // var editBody = activeEditor.getBody();
+            // activeEditor.selection.select(editBody);
+            // var content = activeEditor.selection.getContent({
+            //     'format': 'text'
+            // });
+            //获取富文本框内容带标签
+            var content = tinyMCE.activeEditor.getContent() 
+            //将其添加到
             fd.append('content', content)
 
             if (fd.get('title') == '') {

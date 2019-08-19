@@ -13,7 +13,7 @@
     <script src="js/jquery-1.12.4.min.js"></script>
     <script src="./lib/vue.js"></script>
     <script src="./lib/vue-resource.min.js"></script>
-    <script src="./js/article_list.js"></script>
+    <script src="./lib/axios.min.js"></script>
 </head>
 
 <body>
@@ -65,9 +65,9 @@
                         <td class="text-center">{{item.state}}</td>
                         <td class="text-center">
                             <!-- 编辑按钮 -->
-                            <a href="article_edit.html" class="btn btn-default btn-xs">编辑</a>
+                            <a :href="'article_edit.html?id='+item.id" class="btn btn-default btn-xs">编辑</a>
                             <!-- 删除按钮 -->
-                            <a href="#;" class="btn btn-danger btn-xs">删除</a>
+                            <a href="#;" @click="del(item.id)" class="btn btn-danger btn-xs">删除</a>
                         </td>
                     </tr>
                 </tbody>
@@ -107,6 +107,7 @@
             window.parent.setMenu(1, 1);
         })
     </script>
+    <script src="./js/article_list.js"></script>
 
 </body>
 
