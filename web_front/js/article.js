@@ -18,7 +18,38 @@ new Vue({
             state: '',
             title: ''
         },
-        comments: []
+        comments: [],
+        author: '',
+        content:''
+    },
+    methods: {
+        getComments() {
+            //获取评论列表
+            axios.get('http://127.0.0.1:8080/index/get_comment', {
+                    params: {
+                        articleId: this.id
+                    }
+                })
+                .then(res => {
+                    if (res.data.code == 200) {
+                        this.comments = res.data.data
+                    }
+                })
+        },
+        //发表评论
+        postComment(){
+            axios.post('http://127.0.0.1:8080/index/post_comment',{
+                author: this.author,
+                content: this.content,
+                articleId: this.id,
+            })
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.error(err); 
+            })
+        }
     },
     mounted() {
         //获取地址栏的id
@@ -33,16 +64,8 @@ new Vue({
                 console.log(res);
                 this.articleData = res.data.data
             })
-        //获取评论列表
-        axios.get('http://127.0.0.1:8080/index/get_comment', {
-                params: {
-                    articleId: 200
-                }
-            })
-            .then(res => {
-                if (res.data.code == 200) {
-                    this.comments = res.data.data
-                }
-            })
+        //获取评论
+        this.getComments()
+
     },
 })
